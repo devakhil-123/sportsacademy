@@ -1,26 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
-import { getstudents } from '../ApiServices/Allapi'
+import { useEffect,useState } from 'react'
+import { getevents, getstudents } from '../ApiServices/Allapi'
 
 function Home() {
 
-
-  useEffect(()=>{
-
-  },[])
-
-  const getData=async()=>{
-  const result=await getstudents()
-  console.log(result);
+  const [eventsData,setEventsData]=useState([]) 
+    useEffect(()=>{
+        getData()
+    },[])
 
 
-
-
-  
-
-   
+    const getData=async()=>{
+      const result=await getevents()
+      const events = result.data
+      console.log(events);
+      setEventsData(events)
     }
+  console.log(eventsData);
 
 
     return (
@@ -42,12 +39,22 @@ function Home() {
         </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>Association Cricket League</th>
-            <th>21-05-2023</th>
-            <th>11pm</th>
-            <th>Manjeri</th>
-          </tr>
+          {
+            eventsData.length > 0 ?
+            eventsData.map(item=>(
+              <tr>
+              <th>{item.Name}</th>
+              <th>{item.date}</th>
+              <th>{item.start_time}</th>
+              <th>{item.location}</th>
+            </tr>
+
+            ))
+           
+          :
+          <h3>No events</h3>
+          }
+         
         </tbody>
       </table>
     </div>

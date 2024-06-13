@@ -12,7 +12,9 @@ class Students(models.Model):
     Nationality=models.CharField(max_length=100)
     Contact=models.CharField(max_length=100)
     Guardian_name=models.CharField(max_length=100)
-    Reationship_with_student=models.CharField(max_length=100)
+    Relationship_with_student=models.CharField(max_length=100)
+    Sport=models.CharField(max_length=100)
+    Teams=models.CharField(max_length=100)
 
 
 
@@ -51,11 +53,9 @@ class TrainingSession(models.Model):
 
 class Event(models.Model):
     Name = models.CharField(max_length=100)
-
     date = models.DateField()
     start_time = models.TimeField()
     location = models.CharField(max_length=200)
    
 
-    def __str__(self):
-        return f'{self.home_team.name} vs {self.away_team.name} - {self.date}'
+   
